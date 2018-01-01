@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="http://localhost:8080/auctionbay/" />
+<meta charset="utf-8"/>
+<title>AuctionBay - Auctions</title>
+<link href="resources/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<!--theme-style-->
+<link href="resources/css/external/select2.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/modules/items_listing.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="resources/css/custom/footer.css" rel="stylesheet" type="text/css" media="all" />
+
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!--fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+
+<script src="resources/js/jquery/jquery-1.12.3.min.js" type="text/javascript"></script>
+		
+<script src="resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery/jquery.bootpag.min.js" type="text/javascript"></script>
+
+
+<script src="resources/js/external/select2.full.min.js" type="text/javascript"></script>
+<script src="resources/js/custom/index.js" type="text/javascript"></script>
+<script src="resources/js/custom/redirections.js" type="text/javascript"></script>
+<script src="resources/js/custom/auctions.js" type="text/javascript"></script>
+<!--  <script src="resources/js/custom/item.js" type="text/javascript"></script>-->
+<!--script-->
+</head>
+<body> 
+	<!--header-->
+	<div class="header">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="row">
+					<nav class="navbar navbar-inverse">
+  						<div class="container-fluid">
+    						<div class="navbar-header">
+    							<div class="logo">
+									<a href="#index" class="index-link"><img style="height:40px;padding-right:10px;margin-bottom:3px;" src="http://localhost:8080/auctionbay/resources/images/auction-logo.png" alt=" " /></a>
+								</div>
+     							 <!--  <a class="navbar-brand" href="#">Auctionbay</a>-->
+    						</div>
+    						<ul class="nav navbar-nav">
+      						<li><a href="#" class="index-link">Home</a></li>
+      						
+      						<li  class="active" id="auctions1" style="display:block;"><a href="#" class="view-auctions-ref">Auctions</a></li>
+      						<li  class="active" id="auctions2" style="display:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Auctions <span class="caret"></span></a>
+      							<ul class="dropdown-menu">
+      								<li><a href="#" class="view-auctions-ref" >View Auctions</a></li>
+      								<li><a href="#" class="create-auction-ref">Manage Auctions</a></li>
+      							</ul>			
+      						</li>
+      							
+      						<li id="rating-li" style="display:none;"><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+      						<li><a href="#" class="contact-link"><span class=" glyphicon glyphicon-earphone"></span> Contact</a></li>
+      						
+    						</ul>
+    						
+    						<!--  <form role="search" class="navbar-form navbar-left">
+                				<div class="form-group">
+                    				<input type="text" placeholder="Search" class="form-control">
+                				</div>
+                				<button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+            				</form> -->
+            				
+            				<!-- guest user section -->
+            				<div id="default-right-col">
+            					<ul class="nav navbar-nav navbar-right">
+      								<li>
+      									<a href="#" class="login-link" style="color:#fff;">
+      										<span class="glyphicon glyphicon-log-in"></span> Login | Register
+      									</a>
+      								</li>
+    							</ul>
+            				</div>
+            				
+            				<!-- registered user section -->
+            				<div id="user-right-col" style="display:none">
+            					<ul class="nav navbar-nav navbar-right">
+        						<li class="dropdown">
+        						
+         							<a href="#" id="username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+         							
+         							</a>
+         							
+          							<ul class="dropdown-menu">
+            							<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></li>
+            							<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Auctions</a></li>
+            							<li><a href="#" class="messages-link">
+            								<span class="glyphicon glyphicon-envelope"></span> Messages&nbsp 
+            								<span style="display:none;" id="header-unread-messages" class="label label-danger"></span>
+            								</a>
+            							</li>
+            							<li><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+            							<li role="separator" class="divider"></li>
+            							<li><a href="#" class="log-out">
+            							<span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          							</ul>
+        						</li>
+      							</ul>
+            				</div>
+    						
+  					</div>
+				</nav>
+			</div>				
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div> <!--  header ends -->
+	<!---->
+	<!-- Main Body -->
+	<div class="container">
+		<div class="row">
+		<div class="col-md-3">
+			<div class="row">
+			<div id="recommended-module">
+				<div class="panel panel-info hidden-xs hidden-sm"  >
+      				<div class="panel-heading text-center"><h4>Recommended</h4></div>
+      				<div class="panel-body">
+      					<div id="no-recommendations" style="display:none;"><h5>There are no recommendations</h5></div>
+      					<ul id="rec-list" class="scrollable-menu nav nav-pills nav-stacked">
+  							
+						</ul>
+      				</div>
+   				</div>
+   				
+			</div>
+			</div>
+			<div class="row">
+			<div id="categories-sidebar">
+				<div class="panel panel-success hidden-xs hidden-sm" >
+					<div class="panel-heading text-center"><h4>Categories</h4></div>
+						<ul id="categories-module" class="scrollable-menu nav nav-pills nav-stacked" role="menu">
+							
+						</ul>
+				</div>
+				
+				<div class="panel panel-danger hidden-xs hidden-sm" >
+					<div class="panel-heading text-center"><h4>Filter</h4></div>
+					<div class="panel-body">
+						<div class="btn-group btn-group-justified" data-toggle="buttons" id="radioopt">
+  							<label class="btn btn-primary active">
+      							<input type="radio" name="options" id="active-auctions" value=">Active Auctions" />Active Auctions
+  							</label>
+  							<label class="btn btn-primary">
+      							<input type="radio" name="options" id="all-auctions" value=">All Auctions" />All Auctions
+  							</label>
+						
+						</div>
+					</div>	
+				</div>
+			</div>
+			</div>
+		</div>
+			
+			<div id="advanced-search-module" class="col-xs-12 col-md-9">
+				<div id="accordion" role="tablist" aria-multiselectable="true">
+  					<div class="panel panel-default" id="search-panel" style="background-color:#F08080;">
+    					<div class="panel-heading" id="search-heading" style="background-color:#F08080;" role="tab" id="headingOne">
+      						<h4 class="panel-title" style="color:#000;">
+        					<a class="accordion-toggle" data-toggle="collapse" href="#advanced-search-area" aria-expanded="false" aria-controls="collapseOne">
+          					Advanced Search
+        					</a>
+      						</h4>
+    					</div>
+    					<div id="advanced-search-area" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+       						<div style="margin-top:2%;"></div>
+       						<form class="form-horizontal" id="search-form" method="post" role="form">
+       							
+       								<div class="form-group">
+										<label class="col-sm-3 control-label">Enter Keywords:</label>
+										<div class="col-sm-6">
+											<input class="form-control" id="keywords" name="keywords" type="text" value="">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Enter Description:</label>
+										<div class="col-sm-6">
+											<textarea id="search-desc"></textarea>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Enter Category/ies:</label>
+										<div class="col-sm-8">
+											<select class="categories-search-list" multiple="multiple">
+											
+											</select>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Enter Location:</label>
+										<div class="col-sm-8">
+											<input class="form-control" id="country-search" name="country-search" type="text" value="">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Minimum Bid Price:</label>
+										<div class="col-sm-3">
+											<div class="input-group"><input class="form-control" id="min-bid-price" name="min-bid-price" type="text" value=""><span class='input-group-addon'>$</span></div>
+										</div>
+										
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Maximum Bid Price:</label>
+										<div class="col-sm-3">
+											<div class="input-group"><input class="form-control" id="max-bid-price" name="max-bid-price" type="text" value=""><span class='input-group-addon'>$</span></div>
+										</div>
+										
+									</div>
+									<div style="margin-bottom:2%;border-bottom:2px dotted #fff"></div>
+									<div class="form-group">
+										
+										<div style="margin:0 auto;float:none;" class="col-sm-10">
+											<input type="button" id="reset-button" class="btn btn-secondary" value="Reset"/>
+											<input type="button" id="search-button" class="btn btn-primary" value="Search"/>
+											
+											
+										</div>
+									
+										
+									</div>
+       								
+       						</form>
+    					</div>
+  					</div>
+				</div>
+				<div id="category-indicator" class="alert alert-warning" style="display:none;">
+					<h4 id="text" style="text-align:center;color:green;"></h4>
+				</div>
+			</div> 
+			
+			
+				
+			
+			
+			<div id="available-auctions" class="col-xs-12 col-md-9">
+				<div class="alert alert-warning" id="no_auctions" style="display:none;"> 
+					<strong>No auctions available!</strong> 
+				</div>
+							
+			</div>
+			
+			
+		</div> <!--  1st row -->
+		
+		<div class="row">
+		
+			
+			
+			
+			
+			
+			<div class="row">
+    			<div id="auctions-paginator" class="col-md-6 pull-right"></div>
+			</div>
+			
+			<div class="row">
+				<div id="auctions-byCategory-paginator" class="col-md-6 pull-right"></div>
+			</div>
+			
+			<div class="row">
+				<div id="advSearch-paginator" class="col-md-6 pull-right"></div>
+			</div>
+			
+		</div>	<!--  2nd row -->
+			
+
+		
+		
+		
+	</div> <!-- Main container Ends -->
+	
+
+		<br><br>
+		<footer class="container-fluid text-center">
+ 			<h3>Our Info</h3> 
+  			<h4 id="developers">Alexandros Tsakrilis - sdi1100092</h4>
+  			<h4 id="developers">Panagiotis Kontopoulos - sdi1100124</h4>
+  			<p>Copyright &copy; AuctionBay</p>
+		</footer>
+		
+
+</body>
+</html>

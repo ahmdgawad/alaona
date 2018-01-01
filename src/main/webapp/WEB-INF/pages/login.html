@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="http://localhost:8080/auctionbay/" />
+<title>AuctionBay - Login & Register</title>
+<link href="resources/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />-->
+<link href="resources/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<!--theme-style-->
+
+<link href="resources/css/custom/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/login.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="resources/css/custom/footer.css" rel="stylesheet" type="text/css" media="all" />
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!--fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<!--  <script src="resources/js/jquery/jquery.min.js"></script>-->
+
+<script src="resources/js/jquery/jquery-1.12.3.min.js" type="text/javascript"></script>
+<script src="resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery/jquery.validate.js" type="text/javascript"></script>
+<script src="resources/js/custom/redirections.js" type="text/javascript"></script>
+<script src="resources/js/custom/login.js" type="text/javascript"></script>
+<!--script-->
+
+
+</head>
+<body> 
+	<!--header-->
+	<div class="header">
+		
+		<div class="bottom-header">
+			<div class="container">
+			<div class="row">
+					<nav class="navbar navbar-inverse">
+  						<div class="container-fluid">
+    						<div class="navbar-header">
+    							<div class="logo">
+									<a href="#index" class="index-link"><img style="height:40px;padding-right:10px;margin-bottom:3px;" src="resources/images/auction-logo.png" alt=" " /></a>
+								</div>
+     							 <!--  <a class="navbar-brand" href="#">Auctionbay</a>-->
+    						</div>
+    						<ul class="nav navbar-nav">
+      						<li class="active"><a href="#" class="index-link">Home</a></li>
+      						<li><a href="#" class="view-auctions-ref">Auctions</a></li>
+      						<li><a href="#" class="contact-link"><span class=" glyphicon glyphicon-earphone"></span> Contact</a></li>
+      						
+    						</ul>
+    						
+    						
+  					</div>
+				</nav>
+			</div>
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div> <!-- header ends -->
+	<!---->
+	<div class="container">
+		
+			
+			 
+			 
+			 <div class="row">
+			 <div id="login-place">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">Login</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">Register</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form id="login-form" method="post" role="form" style="display: block;">
+									<div class="form-group">
+										<input type="text" name="username" id="login-username" tabindex="1" class="form-control" placeholder="Username" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="password" id="login-password" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<!--  <div class="form-group text-center">
+										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+										<label for="remember"> Remember Me</label>
+									</div> --> 
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<button name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login">Log In</button>
+											</div>
+										</div>
+									</div>
+									
+								</form>
+								<form id="register-form" method="post" role="form" style="display: none;">
+									
+									<div class="form-group required">
+										<input type="text" name="username" id="usernameSignup" tabindex="2" class="form-control" placeholder="Username">
+									</div>
+									
+									
+									<div class="form-group required">
+										<input type="password" name="passwordSignup" id="passwordSignup" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									
+									
+									<div class="form-group required">
+										<input type="password" name="confirmSignup" id="confirmSignup" tabindex="2" class="form-control" placeholder="Confirm Password">
+									</div>
+									
+									<div class="row">
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="firstname" id="firstnameSignup" tabindex="2" class="form-control" placeholder="Firstname">
+											</div>
+										</div>
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="lastname" id="lastnameSignup" tabindex="2" class="form-control" placeholder="Lastname">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<input type="email" name="emailSignup" id="emailSignup" tabindex="2" class="form-control" placeholder="Email Address">									
+									</div>
+												
+									<div class="row">			
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="trn" id="trnSignup" tabindex="2" class="form-control" placeholder="TRN: e.g. 10229332">
+											</div>
+										</div>
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="phonenumber" id="phonenumberSignup" tabindex="2" class="form-control" placeholder="Phone Number">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="city" id="citySignup" tabindex="2" class="form-control" placeholder="City">
+											</div>
+										</div>
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+													<input type="text" name="street" id="streetSignup" tabindex="2" class="form-control" placeholder="Street">
+											</div>
+										</div>
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="region" id="regionSignup" tabindex="2" class="form-control" placeholder="Country: e.g. Greece">
+											</div>
+										</div>
+										<div class="col-md-6" role="form">
+											<div class="form-group">
+												<input type="text" name="zipcode" id="zipcodeSignup" tabindex="2" class="form-control" placeholder="Zip Code">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<button name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register">Register</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>	 
+	
+		 <div class="clearfix"> </div>
+		 
+		 <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModalLabel" aria-hidden="true">
+  			<div class="modal-dialog" role="dialog">
+    			<div class="modal-content">
+      				<div class="modal-header" style="background-color:navy;">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+        				<h4 class="modal-title" id="warningLabel" style="color:#fff;">Warning</h4>
+      				</div>
+      				<div class="modal-body">
+     				<h4 id="warning-text"></h4>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        				
+      				</div>
+    			</div>
+  			</div>
+		</div>
+		 
+		 
+      	 </div> <!-- Container -->
+	<!---->
+		<br><br>
+		<footer class="container-fluid text-center">
+ 			<h3>Our Info</h3> 
+  			<h4>Alexandros Tsakrilis - sdi1100092</h4>
+  			<h4>Panagiotis Kontopoulos - sdi1100124</h4>
+  			<p>Copyright &copy; AuctionBay</p>
+		</footer>
+
+	
+</body>
+</html>

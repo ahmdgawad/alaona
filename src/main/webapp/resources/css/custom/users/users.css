@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+/* ---- Pending Page ---- */
+
+
+#homeBtn {
+	margin-top: 5%;
+	
+}
+.jumbotron {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border: 1px dashed deeppink;
+}
+
+/* ---- ----*/

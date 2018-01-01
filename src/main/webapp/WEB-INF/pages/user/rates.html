@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="http://localhost:8080/auctionbay/" />
+<meta charset="utf-8"/>
+<title>AuctionBay - Rates</title>
+<link href="resources/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!--theme-style-->
+
+<link href="resources/css/custom/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/users/rates.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="resources/css/custom/footer.css" rel="stylesheet" type="text/css" media="all" />
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!--fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+
+<script src="resources/js/jquery/jquery-1.12.3.min.js" type="text/javascript"></script>
+<script src="resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script src="resources/js/external/rater.js" type="text/javascript"></script>
+<script src="resources/js/custom/redirections.js" type="text/javascript"></script>
+<script src="resources/js/custom/index.js" type="text/javascript"></script>
+<script src="resources/js/custom/user/rates.js" type="text/javascript"></script>
+
+
+</head>
+<body> 
+
+	<!--header-->
+	<div class="header">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="row">
+					<nav class="navbar navbar-inverse">
+  						<div class="container-fluid">
+    						<div class="navbar-header">
+    							<div class="logo">
+									<a href="#index" class="index-link"><img style="height:40px;padding-right:10px;margin-bottom:3px;" src="resources/images/auction-logo.png" alt=" " /></a>
+								</div>
+     							 <!--  <a class="navbar-brand" href="#">Auctionbay</a>-->
+    						</div>
+    						<ul class="nav navbar-nav">
+      						<li><a href="#" class="index-link">Home</a></li>
+      						
+      						<li id="auctions1" style="display:block;"><a href="#" class="view-auctions-ref">Auctions</a></li>
+      						<li id="auctions2" style="display:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Auctions <span class="caret"></span></a>
+      							<ul class="dropdown-menu">
+      								<li><a href="#" class="view-auctions-ref" >View Auctions</a></li>
+      								<li><a href="#" class="create-auction-ref">Manage Auctions</a></li>
+      							</ul>			
+      						</li>
+      							
+      						<li class="active" id="rating-li" style="display:none;"><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+      						<li><a href="#" class="contact-link"><span class=" glyphicon glyphicon-earphone"></span> Contact</a></li>
+      						
+    						</ul>
+    					
+            				
+            				<!-- guest user section -->
+            				<div id="default-right-col">
+            					<ul class="nav navbar-nav navbar-right">
+      								<li>
+      									<a href="#" class="login-link" style="color:#fff;">
+      										<span class="glyphicon glyphicon-log-in"></span> Login | Register
+      									</a>
+      								</li>
+    							</ul>
+            				</div>
+            				
+            				<!-- registered user section -->
+            				<div id="user-right-col" style="display:none">
+            					<ul class="nav navbar-nav navbar-right">
+        						<li class="dropdown">
+        						
+         							<a href="#" id="username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+         							
+         							</a>
+         							
+          							<ul class="dropdown-menu">
+            							<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></li>
+            							<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Auctions</a></li>
+            							<li><a href="#" class="messages-link">
+            								<span class="glyphicon glyphicon-envelope"></span> Messages&nbsp 
+            								<span style="display:none;" id="header-unread-messages" class="label label-danger"></span>
+            								</a>
+            							</li>
+            							<li><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+            							<li role="separator" class="divider"></li>
+            							<li><a href="#" class="log-out">
+            							<span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          							</ul>
+        						</li>
+      							</ul>
+            				</div>
+    						
+  					</div>
+				</nav>
+			</div>				
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div> <!--  header ends -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alert alert-info">
+					<h3 class="text text-center">Rate Sellers and Bidders</h3>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alert alert-warning" id="no-rateData" style="display:none;">
+				<h4 class="text text-center">No data for rating at the moment</h4>
+				</div>
+				<table id="rating-table" class="table table-condensed table-hover">
+					<thead class="table-inverse">
+					<tr>
+						<th class="text-center"><span class="glyphicon glyphicon-user"></span> Users</th>
+						<th class="text-center">Role</th>
+						<th class="text-center">Item</th>
+						<th class="text-center"><span class="glyphicon glyphicon-star"></span>Rating</th>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				
+			</div>
+			
+		</div>
+		<div class="row">
+			<div class="col-xs-12 alert alert-warning" id="btn-area">
+              		<button id="submit-rating" class="btn btn-primary pull-right">Submit Rate</button>
+              	</div>
+		</div>
+		
+	<div class="modal fade" id="ratesModal" tabindex="-1" role="dialog" aria-labelledby="ratesModalLabel" aria-hidden="true">
+  			<div class="modal-dialog" role="dialog">
+    			<div class="modal-content">
+      				<div class="modal-header" style="background-color:green;">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+        				<h4 class="modal-title" id="ratesLabel" style="color:#000;">Info</h4>
+      				</div>
+      				<div class="modal-body">
+     				<h4 id="rate-text"></h4>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-warning" id="rates-btn">OK</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+	
+	
+	</div>
+	
+	<br><br>
+		<footer class="container-fluid text-center">
+ 			<h3>Our Info</h3> 
+  			<h4 id="developers">Alexandros Tsakrilis - sdi1100092</h4>
+  			<h4 id="developers">Panagiotis Kontopoulos - sdi1100124</h4>
+  			<p>Copyright &copy; AuctionBay</p>
+		</footer>
+</body>
+</html>

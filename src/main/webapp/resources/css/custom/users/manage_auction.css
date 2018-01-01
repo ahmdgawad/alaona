@@ -1,0 +1,40 @@
+ td.edit-control:before {
+    font-family: FontAwesome;
+    content: "\f055";
+    cursor: pointer;
+}  
+
+ td.delete-control:before {
+    font-family: FontAwesome;
+    content: "\f055";
+    cursor: pointer;
+}  
+
+th.dt-center, td.dt-center { text-align: center; }
+
+.form-group.required .control-label:after { 
+   content:"*";
+   color:red;
+}
+
+
+td.auction-details-control:before {
+	font-family: FontAwesome;
+    content: "\f055";
+    text-align: center;
+    cursor: pointer;
+}
+tr.shown td.auction-details-control:before {
+	font-family: FontAwesome;
+    content: "\f056";
+    text-align: center;
+    cursor:pointer;
+}
+
+div.slider {
+    display: none;
+}
+
+table.dataTable tbody td.no-padding {
+    padding: 0;
+}

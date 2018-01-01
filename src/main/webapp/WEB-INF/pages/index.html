@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="http://localhost:8080/auctionbay/" />
+<meta charset="utf-8"/>
+<title>AuctionBay - Home</title>
+<link href="resources/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<!--theme-style-->
+
+<link href="resources/css/custom/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/style.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="resources/css/custom/footer.css" rel="stylesheet" type="text/css" media="all" />
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!--fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+
+<script src="resources/js/jquery/jquery-1.12.3.min.js" type="text/javascript"></script>
+<script src="resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+<script src="resources/js/custom/redirections.js" type="text/javascript"></script>
+<script src="resources/js/custom/index.js" type="text/javascript"></script>
+<!--script-->
+<script>
+$(document).ready(function(){
+
+	checkForUser();
+	getUnreadMessages();
+	getRecommendations();
+});
+</script>
+
+</head>
+<body> 
+	<!--header-->
+	<div class="header">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="row">
+					<nav class="navbar navbar-inverse">
+  						<div class="container-fluid">
+    						<div class="navbar-header">
+    							<div class="logo">
+									<a href="#index" class="index-link"><img style="height:40px;padding-right:10px;margin-bottom:3px;" src="resources/images/auction-logo.png" alt=" " /></a>
+								</div>
+     							 <!--  <a class="navbar-brand" href="#">Auctionbay</a>-->
+    						</div>
+    						<ul class="nav navbar-nav">
+      						<li class="active"><a href="#" class="index-link">Home</a></li>
+      						
+      						<li id="auctions1" style="display:block;"><a href="#" class="view-auctions-ref">Auctions</a></li>
+      						<li id="auctions2" style="display:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Auctions <span class="caret"></span></a>
+      							<ul class="dropdown-menu">
+      								<li><a href="#" class="view-auctions-ref" >View Auctions</a></li>
+      								<li><a href="#" class="create-auction-ref">Manage Auction</a></li>
+      							</ul>			
+      						</li>
+      							
+      						<li id="rating-li" style="display:none;"><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+      						<li><a href="#" class="contact-link"><span class=" glyphicon glyphicon-earphone"></span> Contact</a></li>
+      						
+    						</ul>
+    						
+    						<!--  <form role="search" class="navbar-form navbar-left">
+                				<div class="form-group">
+                    				<input type="text" placeholder="Search" class="form-control">
+                				</div>
+                				<button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+            				</form> -->
+            				
+            				<!-- guest user section -->
+            				<div id="default-right-col">
+            					<ul class="nav navbar-nav navbar-right">
+      								<li>
+      									<a href="#" class="login-link" style="color:#fff;">
+      										<span class="glyphicon glyphicon-log-in"></span> Login | Register
+      									</a>
+      								</li>
+    							</ul>
+            				</div>
+            				
+            				<!-- registered user section -->
+            				<div id="user-right-col" style="display:none">
+            					<ul class="nav navbar-nav navbar-right">
+        						<li class="dropdown">
+        						
+         							<a href="#" id="username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+         							
+         							</a>
+         							
+          							<ul class="dropdown-menu">
+            							<li><a href="#" class="profile-link"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></li>
+            							<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Auctions</a></li>
+            							<li><a href="#" class="messages-link">
+            								<span class="glyphicon glyphicon-envelope"></span> Messages&nbsp 
+            								<span style="display:none;" id="header-unread-messages" class="label label-danger"></span>
+            								</a>
+            								
+            							</li>
+            							<li><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+            							<li role="separator" class="divider"></li>
+            							<li><a href="#" class="log-out">
+            							<span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          							</ul>
+        						</li>
+      							</ul>
+            				</div>
+    						
+  					</div>
+				</nav>
+			</div>				
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div> <!--  header ends -->
+	<!---->
+	<!-- Main Body -->
+	<div class="container">
+		<div class="row">
+			
+			
+			<div class="col-lg-12" id="main-info-header">
+				<div class="panel panel-default hero-spacer">
+      				<div class="panel-heading text-center"><h3 id="main-header-title"></h3></div>
+      				<div class="panel-body">
+      				<div id="guest-text">
+						<h1>1. Ahmed Gawad<br>2. Ahmed Sakr</h1>
+
+      				</div>
+      				<div id="user-recommedations" style="display:none;">
+      					<div class="well">
+      						<h3 id="no-rec-available" class="text-center text-warning" style="display:none;"></h3>
+      						<div id="myCarousel" style="height:300px;" class="carousel slide">
+                 				<!-- Indicators -->
+ 		 						<ol class="carousel-indicators"></ol>
+  								<!-- Wrapper for slides -->
+  								<div class="carousel-inner"></div>
+                
+               
+                				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    								<span class="glyphicon glyphicon-chevron-left"></span>
+  								</a>
+  								<a class="right carousel-control" href="#myCarousel" data-slide="next">
+    								<span class="glyphicon glyphicon-chevron-right"></span>
+  								</a>
+                 
+                			
+                			</div><!--/myCarousel-->
+      						
+      					</div>
+      				</div>
+      				</div>
+   				</div>
+   		
+        		<hr>
+			</div>
+
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-4 col-md-3" id="login-panel">
+            	<div class="panel panel-red">
+                	<a href="#" class="login-panel-link">
+                    	<div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-sign-in fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">Login | Register</div>
+                                </div>
+                            </div>
+                        </div>
+					</a>
+					<div class="panel-footer">
+               			<a href="#"><span class="pull-right"><i class="fa fa-share" style="color:#880000;"></i></span></a>
+                        <div class="clearfix"></div>
+                   </div>
+				</div>
+			</div>
+		
+			<div class="col-lg-3 col-md-3" id="va-panel">
+            	<div class="panel panel-green">
+                	<a href="#" class="view-auctions-panel-link">
+                    	<div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bars fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">View Auctions</div>
+                                </div>
+                            </div>
+                        </div>
+					</a>
+					<div class="panel-footer">
+               			<a href="#"><span class="pull-right"><i class="fa fa-share" style="color:#006600;"></i></span></a>
+                        <div class="clearfix"></div>
+                   </div>
+				</div>
+			</div>
+			<div id="manage-auction-panel" class="col-lg-3 col-md-6">
+            	<div class="panel panel-orange">
+                	<a href="" class="manage-panel-link">
+                    	<div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-pencil fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">Manage Auctions</div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+       				<div class="panel-footer">
+                    	<a href="#"><span class="pull-right"><i class="fa fa-share" style="color:#FF6600;"></i></span> </a>
+                        <div class="clearfix"></div>
+                   	</div>
+				</div>
+            </div>
+            <div class="col-lg-3 col-md-3" id="mailbox-panel">
+            	<div class="panel panel-red">
+                    <a href="#" class="mailbox-panel-link">
+                    	<div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-envelope-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">Messages</div>
+                                    <div id="user-messages-indicator" class="huge"><h3 id="user-messages-nubmer" style="display:none;"></h3></div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </a>
+       				<div class="panel-footer">
+                    	<a href="#"><span class="pull-right"><i class="fa fa-share" style="color:red;"></i></span> </a>
+                        <div class="clearfix"></div>
+                   	</div>
+                       
+                    </div>
+            </div>
+			<div class="col-lg-3 col-md-3" id="contact">
+            	<div class="panel panel-blue">
+                    <a href="#" class="contact-panel-link">
+                    	<div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-phone fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">Contact</div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </a>
+       				<div class="panel-footer">
+                    	<a href="#"><span class="pull-right"><i class="fa fa-share" style="color:blue;"></i></span> </a>
+                        <div class="clearfix"></div>
+                   	</div>
+                       
+                    </div>
+            </div>
+            
+        	
+			
+           
+		
+		</div>
+		
+	</div> <!-- Main container Ends -->
+	
+
+		<br><br>
+		<footer class="container-fluid text-center">
+ 			<h3>Our Info</h3> 
+  			<h4 id="developers">Alexandros Tsakrilis - sdi1100092</h4>
+  			<h4 id="developers">Panagiotis Kontopoulos - sdi1100124</h4>
+  			<p>Copyright &copy; AuctionBay</p>
+		</footer>
+		
+
+</body>
+</html>

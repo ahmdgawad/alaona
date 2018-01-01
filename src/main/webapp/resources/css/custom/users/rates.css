@@ -1,0 +1,12 @@
+.rate-base-layer
+{
+	color: #aaa;
+}
+.rate-hover-layer
+{
+	color: orange;
+}
+
+#rating-table td {
+	text-align:center;
+}

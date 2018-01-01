@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<base href="http://localhost:8080/auctionbay/" />
+<title>AuctionBay - Administrator</title>
+
+<link href="resources/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/administrator/admin.css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+ 
+<!-- JQUERY SCRIPTS -->
+<script src="resources/js/jquery/jquery-1.12.3.min.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="resources/js/bootstrap/bootstrap.min.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="resources/js/custom/admin/admin.js"></script>
+
+<!-- DATATABLES SCRIPTS -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
+
+
+
+
+     <!-- GOOGLE FONTS-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+ <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo">
+                    	<a class="navbar-brand" href="#">
+                        	<img style="height:40px;margin-bottom:20px;" src="resources/images/auction-logo.png" alt="Administrator Page"/>
+                    	</a>  
+                    </div>
+                     
+                </div>
+              
+                <span class="logout-spn" >
+                  <a href="#logout" class="admin-logout"style="color:#fff;">LOGOUT</a>  
+                </span>
+            </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                 
+                    <li class="active-link">
+                        <a href="" class="dashboard"><i class="fa fa-desktop "></i>Dashboard</a>
+                    </li>
+                   
+                    <li>
+                        <a href="#" class="pen-nav"><i class="fa fa-users "></i>Pending Users</a>
+                    </li>
+                    <li>
+                        <a href="#" class="reg-nav"><i class="fa fa-users"></i>Registered Users</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="export-nav"><i class="fa fa-qrcode "></i>Export</a>
+                    </li>
+                 
+                    
+                </ul>
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                     <h2>ADMINISTRATOR DASHBOARD</h2>   
+                    </div>
+                </div>              
+                 <!-- /. ROW  -->
+                  <hr />
+                <div id="admin-notifier" style="display:none;"> 
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
+                             <strong>Welcome Admin ! </strong> You Have No pending Task For Today.
+                        </div>
+                       
+                    </div>
+				</div>
+				</div>
+                  <!-- /. ROW  --> 
+              <div class="row text-center pad-top">
+              
+                 <!--   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+                           <a href="/auctionbay/pages/blank.html" >
+						   		<i class="fa fa-envelope-o fa-5x"></i>
+                      			<h4>Mail Box</h4>
+                      	   </a>
+                      </div>
+                  </div>
+                  
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+							<a href="/auctionbay/pages/blank.html" >
+ 								<i class="fa fa-lightbulb-o fa-5x"></i>
+                      			<h4>New Issues</h4>
+                      		</a>
+                      </div>   
+                  </div>-->
+                  
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+                           <a href="#" id="pending-users-link">
+								<i class="fa fa-users fa-5x"></i>
+                      			<h4>Pending Users</h4>
+                     	   </a>
+                      </div>  
+                  </div>
+                  
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                  		<div class="div-square">
+                           <a href="" id="registered-users-link">
+								<i class="fa fa-key fa-5x"></i>
+                      			<h4>Registered Users</h4>
+                      	   </a>
+                      	</div>   
+                  </div>
+                  
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+                           	<a href="" class="export-link">
+								<i class="fa fa-file-code-o fa-5x"></i>
+                      			<h4>Export</h4>
+                      		</a>
+                      </div>  
+                  </div>
+                  
+              </div>
+                 <!-- /. ROW  --> 
+               
+                 <!-- /. ROW  -->   
+				  <div class="row">
+                    <div class="col-lg-12 ">
+						<br/>
+                         
+                    </div>
+                 </div>
+                 
+                 
+                 <div class="well" id="no-pending" style="display:none;">
+                 	<h3 class="text-center">There are no pending users</h3>
+                 </div>
+                 
+                 <div id="pending-users" class="panel panel-default" style="display:none">
+	       			<div class="panel-heading text-center">
+		        		<i class="fa fa-user fa-fw"></i> Pending Users 
+		        		<div id="pending-number"></div>
+		    		</div>
+		    		<div class="panel-body">
+		    				<table id="pending-users-grid" class="display" style="width:100%;"></table>
+					</div>
+	   			</div> 
+	   			
+	   			 <div id="registered-users" class="panel panel-default" style="display:none">
+	       			<div class="panel-heading text-center">
+		        		<i class="fa fa-user fa-fw"></i> Registered Users
+		        		<div id="registered-number"></div>
+		    		</div>
+		    		<div class="panel-body">
+		    				<table id="registered-users-grid" class="display" style="width:100%;"></table>
+					</div>
+	   			</div>
+	   			
+	   			<div id="export-options" class="panel panel-default" style="display:none">
+	   				<div class="panel-heading text-center">
+	   					<h4>Export Area</h4>
+	   				</div>
+	   				<div class="panel-body">
+	   				
+	   					<div class="row">
+	   						
+	   						<div class="col-md-3 col-xs-3">
+	   							<button id="export-all-btn" class="btn btn-danger">Export All</button>
+	   						</div>
+	   					</div>
+	   					<div style="margin-top:10px;border-bottom:2px solid black;"></div>
+	   					<div style="margin-top:10px;"></div>
+	   					<div id="loading-image" style="display:none;z-index:2;top:50%;left:50%;width:100px;height:100px;position:fixed;margin:0 auto;">
+                 				<img src='resources/images/hourglass.svg'/>
+                 		</div>
+	   					<table id="auctions-grid" class="display" style="width:100%;"></table>
+	   					
+	   				</div>
+	       			
+                  
+	   			</div>
+                  <!-- /. ROW  --> 
+    	</div>
+             <!-- /. PAGE INNER  -->
+             
+        <div class="modal fade" id="InfoModal" tabindex="-1" role="dialog" aria-labelledby="InfoModalLabel" aria-hidden="true">
+  			<div class="modal-dialog" role="dialog">
+    			<div class="modal-content">
+      				<div class="modal-header" style="background-color:navy;">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+        				<h4 class="modal-title" id="deleteLabel" style="color:#fff;">Info</h4>
+      				</div>
+      				<div class="modal-body">
+     				<h4 id="info-text"></h4>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>  
+		
+		<div class="modal fade" id="InfoPenModal" tabindex="-1" role="dialog" aria-labelledby="InfoPenModalLabel" aria-hidden="true">
+  			<div class="modal-dialog" role="dialog">
+    			<div class="modal-content">
+      				<div class="modal-header" style="background-color:navy;">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+        				<h4 class="modal-title" id="infoPenLabel" style="color:#fff;">User Accepted</h4>
+      				</div>
+      				<div class="modal-body">
+     				<h4 id="infopen-text"></h4>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-primary" id="infopen-btn">OK</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>   
+             
+             
+        </div>
+        
+        <!-- <div id="divpopup" style="display:none">
+
+			 <div id="popupText"></div>
+		</div>  -->	  
+            
+            
+            
+            
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+    	<div class="footer">
+            <div class="row">
+                <div class="col-lg-12" >
+                    &copy; Designed by Alex Tsak & PKLS
+                </div>
+            </div>
+        </div>
+          
+
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+   
+
+
+
+</body>
+</html>

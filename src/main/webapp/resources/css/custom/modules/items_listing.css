@@ -1,0 +1,145 @@
+.item-gallery-text {
+    background-color: #F2F2F2;
+    height: 75px;
+    overflow: hidden;
+    padding: 3px;
+}
+
+.item-gallery-text h4 {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.item-gallery-details {
+    height: 45px;
+    margin: 3px 3px 0px 3px;
+    padding: 3px;
+}
+
+.item-gallery-details div {
+    clear: left;
+    float: left;
+}
+
+.item-gallery-details button {
+    margin-top: 3px;
+}
+
+.item-sunburst-container {
+    position: relative;
+}
+
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #FFFACD;
+  
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.item-listing-row-full {
+    vertical-align: top;
+    width: 100%;
+    word-break: normal;
+}
+
+.item-listing-row-thumb {
+    padding-right: 10px;
+    text-align: left;
+    vertical-align: top;
+    min-width: 75px;
+}
+
+.item-listing-row-ship {
+    vertical-align: bottom;
+}
+
+.item-listing-table-row td {
+}
+.item-listing-row-data {
+    position: relative;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.item-listingtype-pos {
+    //position: absolute;
+    float:left;
+    font-size:14px;
+    right: 1px;
+    top: 1px;
+}
+
+.item-listing-table-row h4 {
+    margin: 0px;
+    padding: 3px 0px;
+}
+
+.hidden-xs {
+    display: block!important;
+}
+
+.item-listing-row-container {
+    margin: 10px;
+}
+
+
+.item-listingbutton-pos button {
+    width: 120px;
+    float: right;
+}
+
+.item-listingbutton-pos {
+    vertical-align: bottom;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+.item-listingbutton-pos {
+    vertical-align: bottom;
+}
+
+.item-no-photo-thumbnail img {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    width: 140px;
+    height: 140px;
+}
+
+.item-no-photo-thumbnail-xs img {
+	padding-top: 10px;
+    padding-bottom: 5px;
+    width: 60px;
+    height: 60px;
+}
+
+.item-no-photo-thumbnail {
+    background: #ebebeb;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #999;
+    font-size: 100%;
+    height: 150px;
+    text-align: center;
+    width: 150px;
+}
+
+.item-listing-seller{
+	text-align:center;
+}
+
+

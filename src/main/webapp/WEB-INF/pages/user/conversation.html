@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="http://localhost:8080/auctionbay/" />
+<meta charset="utf-8"/>
+<title>AuctionBay - MailBox</title>
+<link href="resources/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<!--theme-style-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link href="resources/css/custom/header.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/custom/users/conversation.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="resources/css/custom/footer.css" rel="stylesheet" type="text/css" media="all" />
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!--fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+
+<script src="resources/js/jquery/jquery-1.12.3.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="resources/js/custom/redirections.js" type="text/javascript"></script>
+<script src="resources/js/custom/index.js" type="text/javascript"></script>
+<script src="resources/js/custom/user/conversation.js" type="text/javascript"></script>
+
+<!--script-->
+
+
+</head>
+<body> 
+	<!--header-->
+	<div class="header">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="row">
+					<nav class="navbar navbar-inverse">
+  						<div class="container-fluid">
+    						<div class="navbar-header">
+    							<div class="logo">
+									<a href="#index" class="index-link"><img style="height:40px;padding-right:10px;margin-bottom:3px;" src="resources/images/auction-logo.png" alt=" " /></a>
+								</div>
+     							 <!--  <a class="navbar-brand" href="#">Auctionbay</a>-->
+    						</div>
+    						<ul class="nav navbar-nav">
+      						<li class="active"><a href="#" class="index-link">Home</a></li>
+      						
+      						<li id="auctions1" style="display:block;"><a href="#" class="view-auctions-ref">Auctions</a></li>
+      						<li id="auctions2" style="display:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Auctions <span class="caret"></span></a>
+      							<ul class="dropdown-menu">
+      								<li><a href="#" class="view-auctions-ref" >View Auctions</a></li>
+      								<li><a href="#" class="create-auction-ref">Manage Auctions</a></li>
+      							</ul>			
+      						</li>
+      							
+      						<li id="rating-li" style="display:none;"><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+      						<li><a href="#" class="contact-link"><span class=" glyphicon glyphicon-earphone"></span> Contact</a></li>
+      						
+    						</ul>
+    						
+    						<!--  <form role="search" class="navbar-form navbar-left">
+                				<div class="form-group">
+                    				<input type="text" placeholder="Search" class="form-control">
+                				</div>
+                				<button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+            				</form> -->
+            				
+            				<!-- guest user section -->
+            				<div id="default-right-col">
+            					<ul class="nav navbar-nav navbar-right">
+      								<li>
+      									<a href="#" class="login-link" style="color:#fff;">
+      										<span class="glyphicon glyphicon-log-in"></span> Login | Register
+      									</a>
+      								</li>
+    							</ul>
+            				</div>
+            				
+            				<!-- registered user section -->
+            				<div id="user-right-col" style="display:none">
+            					<ul class="nav navbar-nav navbar-right">
+        						<li class="dropdown">
+        						
+         							<a href="#" id="username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+         							
+         							</a>
+         							
+          							<ul class="dropdown-menu">
+            							<li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></li>
+            							<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Auctions</a></li>
+            							<li><a href="#" class="messages-link">
+            								<span class="glyphicon glyphicon-envelope"></span> Messages&nbsp 
+            								<span style="display:none;" id="header-unread-messages" class="label label-danger"></span>
+            								</a>
+            							</li>
+            							<li><a href="#" class="rates-link"><span class="glyphicon glyphicon-star"></span> Rates</a></li>
+            							<li role="separator" class="divider"></li>
+            							<li><a href="#" class="log-out">
+            							<span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          							</ul>
+        						</li>
+      							</ul>
+            				</div>
+    						
+  					</div>
+				</nav>
+			</div>				
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div> 
+	<!-- Header ends -->
+	
+	<!-- Main Content -->
+	<div class="container">
+   		<div class="mail-box">
+        	<aside class="sm-side">
+            	<div class="user-head">
+                	<a class="inbox-avatar" href="javascript:;">
+                    	<img  width="64" height="60" src="resources/images/user/default-user.png">
+                   	</a>
+                    <div class="user-name">
+                    	<h5 id="username-upright"></h5>
+                    </div>
+                </div>
+                <div class="inbox-body">
+                	<a id="compose-button" href="#" class="btn btn-danger btn-block" role="button"><i class="glyphicon glyphicon-edit"></i> Compose</a>
+            		<a id="back-to-read" style="display:none;" href="#" class="btn btn-danger btn-block" role="button"><i class="glyphicon glyphicon-arrow-left"></i> Back to Mailbox</a>
+				</div>
+                      <ul class="inbox-nav inbox-divider">
+                          <li class="active" id="inbox-item">
+                              <a href="" class="inbox-ref"><i class="fa fa-inbox"></i> Inbox <span style="display:none;" id="inbox-counter" class="label label-danger pull-right"></span></a>
+
+                          </li>
+                          <li id="sent-item">
+                              <a href="" class="sent-ref"><i class="fa fa-envelope-o"></i> Sent Mail</a>
+                          </li>
+                       
+                      </ul>
+                      
+                   
+
+                      <div class="inbox-body text-center">
+                          <div class="btn-group">
+                              <a class="btn mini btn-primary" href="javascript:;">
+                                  <i class="fa fa-plus"></i>
+                              </a>
+                          </div>
+                          <div class="btn-group">
+                              <a class="btn mini btn-success" href="javascript:;">
+                                  <i class="fa fa-phone"></i>
+                              </a>
+                          </div>
+                          <div class="btn-group">
+                              <a class="btn mini btn-info" href="javascript:;">
+                                  <i class="fa fa-cog"></i>
+                              </a>
+                          </div>
+                      </div>
+
+                  </aside>
+                  <aside class="lg-side">
+                      <div class="inbox-head">
+                          <h3 id="active-area">Inbox</h3>
+                          <form action="#" class="pull-right position">
+                              <div class="input-append">
+                                  <input type="text" class="sr-input" placeholder="Search Mail">
+                                  <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
+                              </div>
+                          </form>
+                      </div>
+                      
+                      
+                      <div class="col-sm-10 col-md-12" id="compose-area" style="display:none;padding:20px;">
+        				<div class="panel panel-default">
+  							<div class="panel-heading">Compose New Message</div>
+  							<div class="panel-body">
+  								<div class="form-group">
+  									
+  									<input class="form-control" type="text" id="recipient" placeholder="To:"/>
+  								</div>
+  								<div class="form-group">
+  									<input class="form-control" id="subject" placeholder="Subject:"/>
+  								</div>
+  								<div class="form-group">
+  									<ul class="text-tools list-inline">
+  										<li class="dropdown">
+  											<a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+  											<span class="glyphicon glyphicon-font"></span>
+  											<span class="current-font">Normal Text</span>
+  											</a>
+  										</li>
+  										<li>
+  											<div class="btn-group">
+  												<a class="btn btn-default" style="font-weight:bold;">Bold</a>
+  												<a class="btn btn-default" style="font-style:italic;">Italic</a>
+  												<a class="btn btn-default" style="font-style:underline;">Underline</a>
+  											</div>
+  										</li>
+  						
+  									</ul>
+  								
+  					
+  								</div>
+  								
+  								<textarea id="message-body" class="form-control" style="height:300px;"></textarea>
+  								
+  				
+  						</div>
+  						<div class="panel-footer">
+  							<div class="pull-right">
+  								<button type="button" class="btn btn-primary" id="send-message"><i class="fa fa-envelope-o"></i> Send</button>
+  							</div>
+  							<button type="button" class="btn btn-default" id="discard-compose"><i class="fa fa-times"></i> Discard</button>
+  						</div>
+					</div>
+        		</div>
+        		
+        	
+                      
+               <div class="inbox-body" id="main-content-area">
+               		<div class="mail-option">
+						<div class="chk-all">
+                        	<input type="checkbox" class="mail-checkbox mail-group-checkbox">
+                                 <div class="btn-group">
+                                     <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+                                         All
+                                         <i class="fa fa-angle-down "></i>
+                                     </a>
+                                     <ul class="dropdown-menu">
+                                         <li><a href="#"> None</a></li>
+                                         <li><a href="#"> Read</a></li>
+                                         <li><a href="#"> Unread</a></li>
+                                     </ul>
+                                 </div>
+                             </div>
+
+                             <div class="btn-group">
+                                 <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+                                     <i class=" fa fa-refresh"></i>
+                                 </a>
+                                 
+                             </div>
+                             <div class="btn-group" id="trash">
+                             	<button style="display:none;" class="btn btn-sm btn-danger" id="trash-message"><span class="glyphicon glyphicon-trash"></span></button>
+                             
+                             </div>
+                           
+                             
+
+                             
+                         </div>
+                         <div class="alert alert-info" style="display:none;" id="no-sent-alert">
+                         	<h4 class="text text-center" id="no-sent-text"></h4>
+                         </div>
+                         
+                          <div class="alert alert-info" style="display:none;" id="no-inbox-alert">
+                         	<h4 class="text text-center" id="no-inbox-text"></h4>
+                         </div>
+                         
+                         
+                         
+                         <!--  ************************ INBOX TABLE AREA ******************************* -->
+                         <div id="inbox-area" style="height:200px;overflow-y:auto;">
+                         <table class="table table-inbox table-hover" id="inbox-table">
+                         	<thead>
+                         		<tr>
+                         		<th></th>
+                         		<th></th>
+                         		<th>Sender</th>
+                         		<th>Subject</th>
+                         		<th></th>
+                         		<th class="text-right" style="padding-right:50px;">Time</th>
+                         		</tr>
+                         	</thead>
+                            <tbody>
+                             <!--  <tr>
+                                  <td class="inbox-small-cells">
+                                      <input type="checkbox" class="mail-checkbox">
+                                  </td>
+                                  <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                                  <td class="view-message dont-show">JW Player</td>
+                                  <td class="view-message">Last Chance: Upgrade to Pro for </td>
+                                  <td class="view-message inbox-small-cells"></td>
+                                  <td class="view-message text-right">March 15</td>
+                              </tr>-->
+                              
+                              
+                          	</tbody>
+                         </table>
+                         </div>
+                         
+                         
+                         <!--  ************************ SENT TABLE AREA ******************************* -->
+                         
+                         <div id="sent-area" style="height:200px;overflow-y:auto;display:none;"> 
+                         <table class="table table-inbox table-hover" id="sent-table">
+                         	<thead>
+                         		<tr>
+                         		<th></th>
+                         		<th></th>
+                         		<th>Recipient</th>
+                         		<th>Subject</th>
+                         		<th></th>
+                         		<th class="text-right" style="padding-right:50px;">Time</th>
+                         		</tr>
+                         	</thead>
+                         	<tbody>
+                          		<!--  <tr class="unread">
+                                  <td class="inbox-small-cells">
+                                      <input type="checkbox" class="mail-checkbox">
+                                  </td>
+                                  <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+                                  <td class="view-message dont-show">JW Player</td>
+                                  <td class="view-message">Last Chance: Upgrade to Pro for </td>
+                                  <td class="view-message inbox-small-cells"></td>
+                                  <td class="view-message text-right">March 15</td>
+                              </tr>-->
+                          	</tbody>
+                         </table>
+                         </div>
+                         
+                         
+                         
+                     <!-- *********************** VIEW INBOX MESSAGE AREA **************************************************  -->   
+                      
+					<div class="col-sm-10 col-md-12" id="view-inbox-area" style="display:none;padding:20px;">
+        			   	<div class="panel panel-default">
+  							<div class="panel-heading">
+  							<div class="row">
+  								<div class="col-sm-3 text-left">
+  									<strong>Message</strong>
+  								</div>
+  									
+  								<div class="col-sm-6 text-center "></div>
+  								<div class="col-sm-3 text-right"> 
+  									<button type="button" id="hide-inbox-message" class="btn btn-default">
+  										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</button>
+								</div>
+								</div>	
+  							</div>
+  							<div class="panel-body">
+  							<form class="form-horizontal">
+  								<div class="form-group">
+  									<label class="col-sm-2" for="sender-inbox-view">From:</label>
+  									<div class="col-sm-8">
+  										<input class="hidden" id="view-inbox-msgID"/>
+  										<input class="form-control" id="sender-inbox-view" placeholder="From:"/>
+  									</div>
+  									
+  								</div>
+  								<div class="form-group">
+  									<label class="col-sm-2" for="subject-inbox-view">Subject:</label>
+  									<div class="col-sm-8">
+  										<input class="form-control" id="subject-inbox-view" placeholder="Subject:"/>
+  									</div>
+  									
+  								</div>
+  							
+  								
+  								<textarea id="view-inbox-textarea" class="form-control" style="height:300px;"></textarea>
+  							</form>
+  							</div>
+  							<div class="panel-footer">
+  								<div class="pull-right">
+  									<button type="button" class="btn btn-primary" id="reply-message"><i class="fa fa-envelope-o"></i> Reply</button>
+  								</div>
+  								<button type="button" class="btn btn-danger" id="delete-msginbox-area"><i class="fa fa-times"></i> Delete</button>
+  							</div>
+						</div>
+        			</div>
+        			
+        			
+        			<!-- *********************************** VIEW SENT MESSAGE AREA **************************************************  -->
+        			
+        				<div class="col-sm-10 col-md-12" id="view-sent-area" style="display:none;padding:20px;">
+        					<div class="panel panel-default">
+  								<div class="panel-heading">
+  									<div class="container-fluid panel-container">
+  										<div class="col-xs-3 text-left">
+  											Message
+  										</div>
+  									
+  										<div class="col-xs-6 text-center "></div>
+  										<div class="col-xs-3 text-right"> 
+  											<button type="button" id="hide-sent-message" class="btn btn-default">
+  												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+											</button>
+										</div>
+  									
+  									
+  									</div>
+								</div>
+  								<div class="panel-body">
+  									<form class="form-horizontal">
+  									<div class="form-group">
+  										<label class="col-sm-2" for="recipient-sent-view">To:</label>
+  										<div class="col-sm-8">
+  											<input class="hidden" id="view-sent-msgID"/>
+  											<input class="form-control" id="recipient-sent-view" placeholder="To:"/>
+  										</div>
+  										
+  									</div>
+  									<div class="form-group">
+  										<label class="col-sm-2" for="subject-sent-view">Subject:</label>
+  										<div class="col-sm-8">
+  											<input class="form-control" id="subject-sent-view" placeholder="Subject:"/>
+  										</div>
+  									</div>
+  									<textarea id="view-sent-textarea" class="form-control" style="height:300px;"></textarea>
+  									</form>
+  								</div>
+  								<div class="panel-footer">
+  									<button type="button" class="btn btn-danger" id="delete-msgsent-area"><i class="fa fa-times"></i> Delete</button>
+  								</div>
+							</div>
+        				</div>
+        				
+        				<!-- *********************** REPLY MESSAGE AREA **************************************************  -->
+        				
+        				<div class="col-sm-10 col-md-12" id="reply-area" style="display:none;padding:20px;">
+        			   	<div class="panel panel-default">
+  							<div class="panel-heading">
+  							<div class="row">
+  								<div class="col-sm-3 text-left">
+  									<strong>Message Reply</strong>
+  								</div>
+  									
+  								<div class="col-sm-6 text-center "></div>
+  								<div class="col-sm-3 text-right"> 
+  									<button type="button" id="hide-inbox-message" class="btn btn-default">
+  										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</button>
+								</div>
+								</div>	
+  							</div>
+  							<div class="panel-body">
+  							<form class="form-horizontal">
+  								<div class="form-group">
+  									<label class="col-sm-2" for="sender-inbox-view">Re:</label>
+  									<div class="col-sm-8">
+  										<input class="hidden" id="reply-msgID"/>
+  										<input class="form-control" id="reply-msg-recipient"/>
+  									</div>
+  									
+  								</div>
+  								<div class="form-group">
+  									<label class="col-sm-2" for="subject-inbox-view">Subject:</label>
+  									<div class="col-sm-8">
+  										<input class="form-control" id="reply-subject"/>
+  									</div>
+  									
+  								</div>
+  							
+  								<textarea id="initial-message" class="form-control" style="height:300px;color:navy;"></textarea>
+  								<div style="margin-bottom:2%;"></div>
+  								<textarea id="reply-textarea" class="form-control" style="height:300px;"></textarea>
+  							</form>
+  							</div>
+  							<div class="panel-footer">
+  								<div class="pull-right">
+  									<button type="button" class="btn btn-primary" id="send-reply-message"><i class="fa fa-envelope-o"></i> Send</button>
+  								</div>
+  								<button type="button" class="btn btn-danger" id="reply-clean"><i class="fa fa-times"></i> Discard</button>
+  							</div>
+						</div>
+        			</div>
+        				
+        				
+        				
+        			
+                   </div>
+                  </aside>
+              </div>
+              
+             <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+  				<div class="modal-dialog" role="dialog">
+    			<div class="modal-content">
+      				<div class="modal-header" style="background-color:#FFD700;">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+        				<h4 class="modal-title" id="infoLabel" style="color:#000;">Info</h4>
+      				</div>
+      				<div class="modal-body">
+     				<h4 id="info-text"></h4>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+      				</div>
+    			</div>
+  				</div>
+			</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- Main Content Ends -->
+	
+	<!-- Footer -->
+	<br><br>
+		<footer class="container-fluid text-center">
+ 			<h3>Our Info</h3> 
+  			<h4 id="developers">Alexandros Tsakrilis - sdi1100092</h4>
+  			<h4 id="developers">Panagiotis Kontopoulos - sdi1100124</h4>
+  			<p>Copyright &copy; AuctionBay</p>
+		</footer>
+	<!-- Footer ends -->	
+
+</body>
+</html>
