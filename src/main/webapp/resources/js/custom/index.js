@@ -80,7 +80,7 @@ function modulesController(page,username){
 	if(username == "") {
 		if(page == "index") {
 			var modules = [];
-			$("#main-header-title").text("Welcome to AuctionBay visitor");
+			$("#main-header-title").text("Welcome to ala-ona.com visitor!");
 			modules.push("#manage-auction-panel");
 			modules.push("#mailbox-panel");
 			modules.push("#sidebar-recommended");
@@ -257,7 +257,7 @@ function getRecommendations(){
 				}else {
 					for(var i=0 ; i< data.length ; i++) {
 						
-					    $('<div class="item"><img src="http://localhost:8080/auctionbay/resources/images/no-image.png" class="img-responsive center-block"><div class="carousel-caption"><h4><a href="'+ window.location.href + '/auctions/item/'+data[i].itemID + '">'+ data[i].name + '</a></h4></div>   </div>').appendTo('.carousel-inner');
+					    $('<div class="item"><img src="resources/images/no-image.png" class="img-responsive center-block"><div class="carousel-caption"><h4><a href="'+ window.location.href + '/auctions/item/'+data[i].itemID + '">'+ data[i].name + '</a></h4></div>   </div>').appendTo('.carousel-inner');
 					    $('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
 
 					  }
