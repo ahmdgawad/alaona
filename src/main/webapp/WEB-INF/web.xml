@@ -44,18 +44,18 @@
 
   <!--  <listener>
 	<listener-class>
-             com.ted.auctionbay.controllers.EMFController
+             com.alaona.controllers.EMFController
         </listener-class>
    </listener> -->
    
    <listener>
 		<description>EntityManagerFactory Listener</description>
-		<listener-class>com.ted.auctionbay.jpautils.EntityManagerFactoryListener</listener-class>
+		<listener-class>com.alaona.jpautils.EntityManagerFactoryListener</listener-class>
 	</listener>
 
 	<filter>
 		<filter-name>interceptor</filter-name>
-		<filter-class>com.ted.auctionbay.filters.EntityManagerInterceptor</filter-class>
+		<filter-class>com.alaona.filters.EntityManagerInterceptor</filter-class>
 	</filter>
 
 	<filter-mapping>

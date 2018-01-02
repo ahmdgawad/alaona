@@ -20,26 +20,26 @@
 	<!--  <tx:annotation-driven />-->
 	<!-- Enables the Spring MVC @Controller programming model -->
 		<!-- DAO's beans -->
-	<beans:bean id="queryUser" class="com.ted.auctionbay.dao.QueryUserImpl"/>
+	<beans:bean id="queryUser" class="com.alaona.dao.QueryUserImpl"/>
 	
-	<beans:bean id="queryCategory" class="com.ted.auctionbay.dao.QueryCategoryImpl"/>
+	<beans:bean id="queryCategory" class="com.alaona.dao.QueryCategoryImpl"/>
 	
-	<beans:bean id="queryAuction" class="com.ted.auctionbay.dao.QueryAuctionImpl"/>
+	<beans:bean id="queryAuction" class="com.alaona.dao.QueryAuctionImpl"/>
 	
-	<beans:bean id="queryItem" class="com.ted.auctionbay.dao.QueryItemImpl"/>
+	<beans:bean id="queryItem" class="com.alaona.dao.QueryItemImpl"/>
 	
-	<beans:bean id="queryConversation" class="com.ted.auctionbay.dao.QueryConversationImpl"/>
+	<beans:bean id="queryConversation" class="com.alaona.dao.QueryConversationImpl"/>
 	
 	<!-- Services' beans -->
-	<beans:bean id="userServices" class="com.ted.auctionbay.services.UserServicesImpl"/>
+	<beans:bean id="userServices" class="com.alaona.services.UserServicesImpl"/>
 	
-	<beans:bean id="recommendationServices" class="com.ted.auctionbay.recommendations.RecommendationService"/>
+	<beans:bean id="recommendationServices" class="com.alaona.recommendations.RecommendationService"/>
 	
-	<beans:bean id="auctionServices" class="com.ted.auctionbay.services.AuctionServicesImpl"/>
+	<beans:bean id="auctionServices" class="com.alaona.services.AuctionServicesImpl"/>
 	
-	<beans:bean id="itemServices" class="com.ted.auctionbay.services.ItemServicesImpl"/>
+	<beans:bean id="itemServices" class="com.alaona.services.ItemServicesImpl"/>
 	
-	<beans:bean id="conversationServices" class="com.ted.auctionbay.services.ConversationServicesImpl"/>
+	<beans:bean id="conversationServices" class="com.alaona.services.ConversationServicesImpl"/>
 	
 	<!-- Recommendations task scheduler. Runs every 15 minutes -->
 	<task:scheduled-tasks scheduler="recommendationScheduler">
@@ -60,6 +60,6 @@
 	
 	<mvc:resources mapping="/resources/**" location="resources/" />
 	<mvc:resources mapping="/pages/**" location="/WEB-INF/pages/" />
-	<context:component-scan base-package="com.ted.auctionbay" />
+	<context:component-scan base-package="com.alaona" />
 	
 </beans:beans>
