@@ -235,11 +235,11 @@
 		</dependency>
 
 		<!-- Oracle JDBC Thin Driver -->
-		<dependency>
-			<groupId>com.oracle.jdbc.driver</groupId>
-			<artifactId>ojdbc7</artifactId>
-			<version>1.7</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.oracle.jdbc.driver</groupId>-->
+			<!--<artifactId>ojdbc7</artifactId>-->
+			<!--<version>1.7</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>mysql</groupId>
