@@ -34,7 +34,7 @@ function getNumberOfUsers(){
 	$.ajax({
 		type : "GET",
 		dataType:'json',
-		url  : "/auctionbay/administrator/count-users",
+		url  : "/administrator/count-users",
 		success : function(data) {
 			$("#pending-number").text(data.pending_users);
 			$("#registered-number").text(data.registered_users);
@@ -168,7 +168,7 @@ function createGrids(){
 	pending_table = $('#pending-users-grid').DataTable( {
 		"processing": true,
 	    "serverSide": true,
-	    ajax:"/auctionbay/administrator/pending-users",
+	    ajax:"/administrator/pending-users",
 	    
         columns: [
             { title: "Username" },
@@ -198,7 +198,7 @@ function createGrids(){
 	registered_table = $('#registered-users-grid').DataTable( {
 		"processing": true,
 	    "serverSide": true,
-	    ajax:"/auctionbay/administrator/registered-users",
+	    ajax:"/administrator/registered-users",
 	    
         columns: [
             { title: "Username" },
@@ -218,7 +218,7 @@ function createGrids(){
 	auctions_table = $('#auctions-grid').DataTable( {
 		"processing": true,
 	    "serverSide": true,
-	    ajax:"/auctionbay/administrator/auctions-to-export",
+	    ajax:"/administrator/auctions-to-export",
 	    
         columns: [
             { title: "auctionID" },
@@ -259,7 +259,7 @@ function accept_user(username){
 			username : username
 		},
 		datatype: 'json',
-		url  : "/auctionbay/administrator/accept-user",
+		url  : "/administrator/accept-user",
 		success : function(response) {	
 			if(response == "accepted"){
 				$("#infopen-text").html("User: <strong>" + username + "</strong> was accepted!");
@@ -282,7 +282,7 @@ function ExportAll () {
 	$.ajax({
 		type : "POST",
 		datatype: 'json',
-		url  : "/auctionbay/administrator/export-all-to-xml",
+		url  : "/administrator/export-all-to-xml",
 		success : function(response) {
 			if(response == "Success"){
 				$("#loading-image").fadeOut(500);
@@ -306,7 +306,7 @@ function exportAuction(itemID) {
 	$.ajax({
 		type : "POST",
 		datatype: 'json',
-		url  : "/auctionbay/administrator/export-to-xml",
+		url  : "/administrator/export-to-xml",
 		data : {itemID:itemID},
 		success : function(response) {	
 			//$("#loading-image").css("display","none");

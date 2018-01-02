@@ -143,7 +143,8 @@ public class QueryUserImpl implements QueryUser{
 		penUser.getUser().setRegistereduser(regUser);
 		regUser.setUser(penUser.getUser());
 		
-		em.createNativeQuery("DELETE FROM pendinguser WHERE Username=?",Pendinguser.class).setParameter(1, username).executeUpdate();
+		em.createNativeQuery("DELETE FROM pendinguser WHERE Username=?",Pendinguser.class).setParameter(1,
+				username).executeUpdate();
 		//System.out.println("regUser: " + regUser.getUsername());
 		em.persist(regUser);
 		

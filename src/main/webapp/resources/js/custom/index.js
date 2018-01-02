@@ -198,7 +198,7 @@ function editText(module,text) {
  */
 function getUnreadMessages(){
 	var username = getUser();
-	var url = window.location.protocol+ "//" + window.location.hostname + ":" +window.location.port + "/auctionbay/user/";
+	var url = window.location.protocol+ "//" + window.location.hostname + ":" +window.location.port + "/user/";
 	if(username != ""){
 		//console.log("getting unread messages");
 		$.ajax({
@@ -235,7 +235,7 @@ function getUnreadMessages(){
  */
 function getRecommendations(){
 	var username = getUser();
-	var url = window.location.protocol+ "//" + window.location.hostname + ":" +window.location.port + "/auctionbay/user/";
+	var url = window.location.protocol+ "//" + window.location.hostname + ":" +window.location.port + "/user/";
 	
 	if(username != ""){
 		//console.log("getting recommendations for the user");
