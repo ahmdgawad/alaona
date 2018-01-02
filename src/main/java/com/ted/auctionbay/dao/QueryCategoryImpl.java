@@ -16,7 +16,7 @@ public class QueryCategoryImpl implements QueryCategory{
 		
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createNativeQuery("SELECT c.name,COUNT(*) FROM category c, item_has_category ihc "
-				+ "where c.categoryID = ihc.categoryID GROUP by c.name");
+				+ "where c.categoryID = ihc.categoryID GROUP by c.categoryID");
 		List<Object[]> categoryList = query.getResultList();
 		
 		return categoryList;
@@ -49,8 +49,7 @@ public class QueryCategoryImpl implements QueryCategory{
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		
 		Query query = em.createNativeQuery("SELECT c.name,COUNT(*) FROM auction a, category c, item_has_category ihc "
-				+ "where c.categoryID = ihc.categoryID and a.ItemID = ihc.itemID and a.EndTime >= sysdate GROUP by c" +
-				".name");
+				+ "where c.categoryID = ihc.categoryID and a.ItemID = ihc.itemID and a.EndTime >= NOW() GROUP by c.categoryID");
 		List<Object[]> categoryList = query.getResultList();
 		
 		return categoryList;

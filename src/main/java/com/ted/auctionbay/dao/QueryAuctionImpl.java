@@ -29,7 +29,7 @@ public class QueryAuctionImpl implements QueryAuction {
 	@Override
 	public int numOfActiveAuctions() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE EndTime >= sysdate");
+		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE EndTime >= NOW()");
 		int num;
 		if(query.getResultList().get(0) == null){
 			num = 0;
@@ -44,7 +44,7 @@ public class QueryAuctionImpl implements QueryAuction {
 	@Override
 	public int numOfClosedAuctions() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE EndTime <= sysdate and AuctionID IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction rba)");
+		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE EndTime <= NOW() and AuctionID IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction as rba)");
 		int num;
 		if(query.getResultList().get(0) == null){
 			num = 0;
@@ -321,7 +321,7 @@ public class QueryAuctionImpl implements QueryAuction {
 	@Override
 	public List<Auction> getActiveAuctions(int startpage, int endpage) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT * FROM auction WHERE EndTime >= sysdate",Auction.class);
+		Query query = em.createNativeQuery("SELECT * FROM auction WHERE EndTime >= NOW()",Auction.class);
 		query.setFirstResult(startpage);
 		query.setMaxResults(endpage);
 		return query.getResultList();
@@ -330,7 +330,7 @@ public class QueryAuctionImpl implements QueryAuction {
 	@Override
 	public List<Auction> getExpiredAuctions() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT * FROM auction WHERE EndTime < sysdate",Auction.class);
+		Query query = em.createNativeQuery("SELECT * FROM auction WHERE EndTime < NOW()",Auction.class);
 		return query.getResultList();
 	}
 
@@ -341,7 +341,7 @@ public class QueryAuctionImpl implements QueryAuction {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createNativeQuery("SELECT a.AuctionID, a.Seller, a.Title, ruba.Bidder_Username"
 				+ " FROM auction a, registereduser_bidsin_auction ruba"
-				+ " WHERE EndTime < sysdate AND a.AuctionID = ruba.AuctionID"
+				+ " WHERE EndTime < NOW() AND a.AuctionID = ruba.AuctionID"
 				+ " AND(a.Seller = ?1 OR ruba.Bidder_Username = ?2)"
 				+ " AND (a.Seller NOT IN (SELECT Username FROM sellerrating WHERE Rate > 0) or ruba.Bidder_Username NOT IN (SELECT Username FROM bidderrating WHERE Rate > 0))");
 		query.setParameter(1, username);
@@ -358,7 +358,7 @@ public class QueryAuctionImpl implements QueryAuction {
 						"SELECT a.AuctionID,a.ItemID,a.Seller,a.Title,a.BuyPrice,a.FirstBid,a.StartTime,a.EndTime "
 								+ "FROM auction a,category c,item_has_category ihc, item i"
 								+ " where a.ItemID = i.ItemID and i.ItemID = ihc.ItemID and ihc.CategoryID = c.CategoryID"
-								+ " and c.Name = ?1 and a.EndTime >= sysdate", Auction.class);
+								+ " and c.Name = ?1 and a.EndTime >= NOW()", Auction.class);
 
 		query.setParameter(1, category);
 		query.setFirstResult(startpage);
@@ -412,12 +412,7 @@ public class QueryAuctionImpl implements QueryAuction {
 	@Override
 	public boolean auctionCanBeEdited(int auctionID) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		//Query query = em.createNativeQuery("SELECT IF((SELECT count(a.AuctionID) FROM auction a, " +
-		//		"registereduser_bidsin_auction rba WHERE (a.AuctionID = ?1 and a.AuctionID = rba.AuctionID and a" +
-		//		".StartTime <= sysdate)) = 0 ,'1','0') Can_Edit");
-		Query query = em.createNativeQuery("SELECT decode  ((SELECT count(a.AuctionID) FROM auction a, " +
-				"registereduser_bidsin_auction rba WHERE (a.AuctionID = ? and a.AuctionID = rba.AuctionID and a.StartTime <= sysdate)) , '0' , '1','0') can_edit from dual");
-
+		Query query = em.createNativeQuery("SELECT IF((SELECT count(a.AuctionID) FROM auction as a, registereduser_bidsin_auction as rba WHERE (a.AuctionID = ?1 and a.AuctionID = rba.AuctionID and a.StartTime <= NOW())) = 0 ,'1','0') as Can_Edit");
 		query.setParameter(1, auctionID);
 		String can_edit = query.getResultList().get(0).toString();
 		if (can_edit.equals("0")){
@@ -456,10 +451,10 @@ public class QueryAuctionImpl implements QueryAuction {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em
 				.createNativeQuery(
-						"SELECT a.AuctionID, a.ItemID, a.Title, rba.Bidder_Username, rba.BidPrice, a.EndTime FROM auction a, registereduser_bidsin_auction rba"
+						"SELECT a.AuctionID, a.ItemID, a.Title, rba.Bidder_Username, rba.BidPrice, a.EndTime FROM auction as a, registereduser_bidsin_auction as rba"
                         + " WHERE a.AuctionID = rba.AuctionID"
-                        + " and rba.BidPrice = (SELECT MAX(rba1.BidPrice) FROM registereduser_bidsin_auction rba1 WHERE rba1.AuctionID=a.AuctionID)"
-                        + " and a.EndTime <= sysdate"
+                        + " and rba.BidPrice = (SELECT MAX(rba1.BidPrice) FROM registereduser_bidsin_auction as rba1 WHERE rba1.AuctionID=a.AuctionID)"
+                        + " and a.EndTime <= NOW()"
                         + " and a.Seller = ?"
                         + " ORDER BY a.EndTime DESC");
 
@@ -476,9 +471,9 @@ public class QueryAuctionImpl implements QueryAuction {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em
 				.createNativeQuery(
-						"SELECT a.* FROM auction a"
-                        + " WHERE a.AuctionID NOT IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction rba)"
-                        + " and a.Seller = ? and a.EndTime <= sysdate",Auction.class);
+						"SELECT a.* FROM auction as a"
+                        + " WHERE a.AuctionID NOT IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction as rba)"
+                        + " and a.Seller = ? and a.EndTime <= NOW()",Auction.class);
 
 		query.setParameter(1, username);
 		query.setFirstResult(startpage);
@@ -491,7 +486,7 @@ public class QueryAuctionImpl implements QueryAuction {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em
 				.createNativeQuery(
-						"SELECT IFNULL( (SELECT '1' FROM auction a, auctionhistory ah WHERE a.ItemID=ah.ItemID and a.ItemID=? ),'0') Found");
+						"SELECT IFNULL( (SELECT '1' FROM auction as a, auctionhistory as ah WHERE a.ItemID=ah.ItemID and a.ItemID=? ),'0') as Found");
 
 		query.setParameter(1, itemID);
 		int found = Integer.parseInt(query.getResultList().get(0).toString());

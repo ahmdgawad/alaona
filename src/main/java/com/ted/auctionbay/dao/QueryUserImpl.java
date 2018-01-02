@@ -29,7 +29,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public boolean userExists(String username) {	
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT Username FROM users WHERE Username =?");
+		Query query = em.createNativeQuery("SELECT Username FROM user WHERE Username =?");
 		query.setParameter(1, username); 
 		boolean res = !query.getResultList().isEmpty(); //then user exists already
 		//System.out.println("user exist: " + res);
@@ -70,7 +70,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public boolean user_validator(String username, String password){
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query q = em.createNativeQuery("SELECT Username,Password FROM users WHERE Username =? AND Password=?");
+		Query q = em.createNativeQuery("SELECT Username,Password FROM user WHERE Username =? AND Password=?");
 		q.setParameter(1,username);
 		q.setParameter(2, password);
 		if(!q.getResultList().isEmpty()){
@@ -147,8 +147,7 @@ public class QueryUserImpl implements QueryUser{
 		penUser.getUser().setRegistereduser(regUser);
 		regUser.setUser(penUser.getUser());
 		
-		em.createNativeQuery("DELETE FROM pendinguser WHERE Username=?",Pendinguser.class).setParameter(1,
-				username).executeUpdate();
+		em.createNativeQuery("DELETE FROM pendinguser WHERE Username=?",Pendinguser.class).setParameter(1, username).executeUpdate();
 		//System.out.println("regUser: " + regUser.getUsername());
 		em.persist(regUser);
 		
@@ -189,7 +188,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public User getUser(String username) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT * FROM users WHERE Username = ?",User.class);
+		Query query = em.createNativeQuery("SELECT * FROM user WHERE Username = ?",User.class);
 		query.setParameter(1, username);
 		User user = (User) query.getResultList().get(0);
 		if(user != null) {
@@ -306,7 +305,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public List<User> getUsers() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT * FROM users",User.class);
+		Query query = em.createNativeQuery("SELECT * FROM user",User.class);
 		List<User> user = query.getResultList();
 		if(user != null) {
 			return user;
@@ -341,7 +340,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public List<Auction> get_active_user_auctions(String username,int startpage, int pagesize) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT * FROM auction WHERE Seller=? AND EndTime >= sysdate",Auction.class);
+		Query query = em.createNativeQuery("SELECT * FROM auction WHERE Seller=? AND EndTime >= NOW()",Auction.class);
 		query.setFirstResult(startpage);
 		query.setMaxResults(pagesize);
 		query.setParameter(1, username);
@@ -355,9 +354,9 @@ public class QueryUserImpl implements QueryUser{
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em
 				.createNativeQuery(
-						"SELECT a.* FROM auction a"
-                        + " WHERE a.AuctionID NOT IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction rba)"
-                        + " and a.Seller = ? and a.EndTime <= sysdate",Auction.class);
+						"SELECT a.* FROM auction as a"
+                        + " WHERE a.AuctionID NOT IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction as rba)"
+                        + " and a.Seller = ? and a.EndTime <= NOW()",Auction.class);
 
 		query.setParameter(1, username);
 		query.setFirstResult(startpage);
@@ -368,7 +367,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public int count_active_user_auctions(String username) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE Seller=? AND EndTime >= sysdate");
+		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE Seller=? AND EndTime >= NOW()");
 		query.setParameter(1, username);
 		return Integer.parseInt(query.getResultList().get(0).toString());
 	}
@@ -376,7 +375,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public int count_expired_user_auctions(String username) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE Seller=? AND EndTime < sysdate");
+		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE Seller=? AND EndTime < NOW()");
 		query.setParameter(1, username);
 		return Integer.parseInt(query.getResultList().get(0).toString());
 	}
@@ -386,9 +385,9 @@ public class QueryUserImpl implements QueryUser{
 	public List<Object[]> getUserBids(String username, int startpage, int endpage) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createNativeQuery("SELECT a.AuctionID, a.ItemID, a.Title, a.Seller, a.Endtime, a.BuyPrice,"
-				+ "(SELECT MAX(BidPrice) FROM registereduser_bidsin_auction WHERE Bidder_Username=?1) Highset_Bid, rba.BidPrice, rba.BidTime "
-				+ "FROM auction a, registereduser_bidsin_auction rba WHERE a.AuctionID = rba.AuctionID and rba.Bidder_Username=?2 "
-				+ "and a.EndTime >= sysdate");
+				+ "(SELECT MAX(BidPrice) FROM registereduser_bidsin_auction WHERE Bidder_Username=?1) as Highset_Bid, rba.BidPrice, rba.BidTime "
+				+ "FROM auction as a, registereduser_bidsin_auction as rba WHERE a.AuctionID = rba.AuctionID and rba.Bidder_Username=?2 "
+				+ "and a.EndTime >= NOW()");
 		query.setParameter(1, username);
 		query.setParameter(2, username);
 		query.setFirstResult(startpage);
@@ -399,9 +398,9 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public int getUserBidsNum(String username) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT COUNT(*) FROM auction a, registereduser_bidsin_auction rba "
+		Query query = em.createNativeQuery("SELECT COUNT(*) FROM auction as a, registereduser_bidsin_auction as rba "
 				+ "WHERE a.AuctionID = rba.AuctionID and rba.Bidder_Username=?1 "
-				+ "and a.EndTime >= sysdate");
+				+ "and a.EndTime >= NOW()");
 		query.setParameter(1, username);
 		int num;
 		if( query.getResultList().get(0) == null){
@@ -416,7 +415,7 @@ public class QueryUserImpl implements QueryUser{
 	@Override
 	public int countClosedAuctions(String username) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE Seller=?1 and EndTime <= sysdate and AuctionID IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction rba)");
+		Query query = em.createNativeQuery("SELECT count(*) FROM auction WHERE Seller=?1 and EndTime <= NOW() and AuctionID IN (SELECT rba.AuctionID FROM registereduser_bidsin_auction as rba)");
 		query.setParameter(1, username);
 		int num;
 		if(query.getResultList().get(0) == null){
